@@ -22,13 +22,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import sun.misc.BASE64Decoder;
+//import sun.misc.BASE64Decoder;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @PropertySource("classpath:common.properties")
@@ -149,8 +146,8 @@ public class ProductServiceImpl implements ProductService {
     public void resourceFileSave(ResourceFile resourceFile) throws Exception{
 
         String filePath = env.getProperty("file.product-image-path") + resourceFile.getFileName();
-        BASE64Decoder base64Decoder = new BASE64Decoder();
-        byte[] resFile = base64Decoder.decodeBuffer(resourceFile.getBase64String());
+//        BASE64Decoder base64Decoder = new BASE64Decoder();
+        byte[] resFile = Base64.getDecoder().decode(resourceFile.getBase64String());
         OutputStream outputStream = new FileOutputStream(filePath);
         outputStream.write(resFile);
 

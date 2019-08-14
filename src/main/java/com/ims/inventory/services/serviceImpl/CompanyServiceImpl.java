@@ -17,7 +17,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
-import sun.misc.BASE64Decoder;
+//import sun.misc.BASE64Decoder;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -146,8 +146,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     public void resourceFileSave(ResourceFile resourceFile) throws Exception{
         String filePath = env.getProperty("file.company-logo-path") + resourceFile.getFileName();
-        BASE64Decoder base64Decoder = new BASE64Decoder();
-        byte[] resFile = base64Decoder.decodeBuffer(resourceFile.getBase64String());
+//        BASE64Decoder base64Decoder = new BASE64Decoder();
+        byte[] resFile = Base64.getDecoder().decode(resourceFile.getBase64String());
         OutputStream outputStream = new FileOutputStream(filePath);
         outputStream.write(resFile);
     }
